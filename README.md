@@ -1,42 +1,91 @@
-# TaikoHub Dactyl Manuform Keyboard ZMK Configuration
+# ZMK Dactyl Manuform 64 Configuration
 
-## Introduction
+This repository contains the ZMK firmware configuration for a TaikoHub Dactyl Manuform 64-key split keyboard using a SuperMini nRF52840 controller.
 
-This repository contains the ZMK configuration for the [TaikoHub Dactyl Manuform](https://taikohub.com), a Bluetooth-enabled split ergonomic keyboard. Customize your keyboard's layout and functionality with these files.
+The keymap has been ported from a previous Keyball61 layout, keeping the main QWERTY-style layer, navigation/media/mouse layers, Korean language toggle, and Python/Django macro combos where possible.
 
+## Hardware
 
-Compatible with nice!nano v2, SuperMini nRF52840, and Pro Micro nRF52840 controllers (not compatible with BlueMicro).
+- Keyboard: TaikoHub Dactyl Manuform 64-key / 5x6 split
+- Controller: SuperMini nRF52840
+- ZMK board target: `nice_nano//zmk`
+- Shields:
+  - `dactyl_manuform_5x6_left`
+  - `dactyl_manuform_5x6_right`
+- Reset firmware target:
+  - `settings_reset`
 
+The shield uses a Pro Micro-compatible pinout. SuperMini nRF52840 works with this configuration when wired as a Pro Micro/nice!nano-compatible controller.
 
-For complete setup instructions and documentation, visit the [official TaikoHub Dactyl Manuform documentation](https://docs.taikohub.com).
+## Files To Edit
 
+For normal key layout changes, edit only:
 
+```text
+config/dactyl_manuform_5x6.keymap
+```
 
-## Instructions
+This file contains:
 
-1. Fork this repo.
-2. Clone the forked repo to your local machine.
-   ```bash
-   # replace yourusername with your Github username
-   git clone https://github.com/yourusername/zmk-config.git
-   ```
-3. Git checkout the branch that matches your keyboard size.
-   ```bash
-   # Size large (6 keyed-thumb cluster)
-   git checkout large
-   # Size medium (5 keyed-thumb cluster)
-   git checkout medium
-   # Size small (3 keyed-thumb cluster)
-   git checkout small
-   ```
-4. Open the `config/dactyl_manuform_5x6.keymap` to edit the keyboard layout.
-   ```bash
-   cd zmk-config
-   code config/dactyl_manuform_5x6.keymap
-   ```
-5. Once you are done, commit and push the change.
-   ```bash
-   git commit -m "Update keymap"
-   git push
-   ```
-6. Go to your Github repo and check the Actions tab. You should see a new workflow run. Once the workflow is complete, you should see a new firmware file in the `artifacts` section. Download the `firmware.zip` file.
+- `DEFAULT` layer
+- `NAV` layer
+- `MEDIA` layer
+- `MOUSE` layer
+- tap-hold settings for `&mt` and `&lt`
+- combos
+- macros
+
+For firmware behavior settings such as BLE strength, sleep, display, RGB, or macro queue size, edit:
+
+```text
+config/dactyl_manuform_5x6.conf
+```
+
+Do not edit the shield overlays unless the physical wiring, matrix pins, diode direction, or hardware features have changed.
+
+## Build
+
+Firmware is built by GitHub Actions on every push.
+
+The build matrix is defined in:
+
+```text
+build.yaml
+```
+
+It currently builds:
+
+- left half firmware
+- right half firmware
+- settings reset firmware
+
+After pushing changes, open the repository's Actions tab and download the generated firmware artifact when the workflow completes.
+
+## Flashing
+
+1. Download the firmware zip from GitHub Actions artifacts.
+2. Extract the zip.
+3. Put the left half into bootloader mode and copy the left UF2 file to it.
+4. Put the right half into bootloader mode and copy the right UF2 file to it.
+5. If pairing or BLE state becomes inconsistent, flash `settings_reset` first, then flash the left and right firmware again.
+
+## Common Workflow
+
+```powershell
+# Edit the keymap
+code config\dactyl_manuform_5x6.keymap
+
+# Review changes
+git diff
+
+# Commit and push
+git add config\dactyl_manuform_5x6.keymap
+git commit -m "Update keymap"
+git push origin main
+```
+
+## Notes
+
+- The repository tracks ZMK `main`, so upstream ZMK changes can affect build behavior.
+- The current board target uses the newer ZMK board id `nice_nano//zmk`, not the older `nice_nano_v2` name.
+- The mouse layer uses ZMK mouse key behaviors. It does not add a physical trackball to this keyboard.
