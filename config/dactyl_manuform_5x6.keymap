@@ -113,11 +113,11 @@
                 &kp ESC           &mt EXCL N1  &mt AT N2     &mt HASH N3   &mt DOLLAR N4   &mt PERCENT N5               &mt CARET N6  &mt AMPS N7  &mt ASTRK N8         &mt LEFT_PARENTHESIS N9  &mt RIGHT_PARENTHESIS N0  &mt TILDE GRAVE
                 &kp TAB           &kp Q        &kp W         &kp E         &kp R           &kp T                        &kp Y         &kp U        &kp I                &kp O                    &kp P                     &mt PIPE BACKSLASH
                 &kp LANG_HANGEUL  &kp A        &kp S         &kp D         &kp F           &kp G                        &kp H         &kp J        &kp K                &kp L                    &mt COLON SEMI            &mt DOUBLE_QUOTES SQT
-                &kp LEFT_SHIFT    &kp Z        &kp X         &kp C         &kp V           &kp B                        &kp N         &kp M        &mt LESS_THAN COMMA  &mt GREATER_THAN DOT     &mt QMARK FSLH            &mo MEDIA
+                &kp LCTRL         &kp Z        &kp X         &kp C         &kp V           &kp B                        &kp N         &kp M        &mt LESS_THAN COMMA  &mt GREATER_THAN DOT     &mt QMARK FSLH            &mo MEDIA
                                                &kp LEFT_WIN  &none                                                                   &mt UNDER MINUS  &mt PLUS EQUAL
                                                                             &kp LEFT_SHIFT &mo NAV                      &kp SPACE  &kp ENTER
-                                                                            &kp LEFT_ALT   &mo MACRO                   &kp LEFT_SHIFT  &kp BACKSPACE
-                                                                            &kp LEFT_ALT   &kp LS(LCTRL)            &mt LEFT_BRACE LEFT_BRACKET  &mt RIGHT_BRACE RIGHT_BRACKET
+                                                                            &kp LEFT_ALT   &none                        &kp BACKSPACE &mt RIGHT_BRACE RIGHT_BRACKET
+                                                                            &kp LS(LCTRL)   &mo MACRO                   &kp LEFT_SHIFT  &mt LEFT_BRACE LEFT_BRACKET
             >;
         };
 
@@ -129,7 +129,7 @@
                 &kp CAPS        &kp F11  &kp F12  &trans  &trans  &trans                  &kp PAGE_UP    &kp LEFT      &kp DOWN      &kp RIGHT      &trans  &trans
                 &trans          &trans   &trans   &trans  &trans  &trans                  &kp PAGE_DOWN  &kp LC(LEFT)  &trans        &kp LC(RIGHT)  &trans  &trans
                                            &trans  &trans                                            &trans  &trans
-                                                           &trans  &kp BACKSPACE           &kp DEL  &trans
+                                                           &trans  &trans                  &kp BACKSPACE  &kp DEL
                                                            &trans  &trans                  &trans   &trans
                                                            &trans  &trans                  &trans   &trans
             >;
