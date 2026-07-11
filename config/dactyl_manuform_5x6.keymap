@@ -1,15 +1,12 @@
 #define DEFAULT 0
 #define NAV     1
 #define MEDIA   2
-#define MOUSE   3
+#define MACRO   3
 
-#include <behaviors/mouse_keys.dtsi>
-#include <dt-bindings/zmk/mouse.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/pointing.h>
 
 &lt {
     tapping-term-ms = <240>;
@@ -116,11 +113,11 @@
                 &kp ESC           &mt EXCL N1  &mt AT N2     &mt HASH N3   &mt DOLLAR N4   &mt PERCENT N5               &mt CARET N6  &mt AMPS N7  &mt ASTRK N8         &mt LEFT_PARENTHESIS N9  &mt RIGHT_PARENTHESIS N0  &mt TILDE GRAVE
                 &kp TAB           &kp Q        &kp W         &kp E         &kp R           &kp T                        &kp Y         &kp U        &kp I                &kp O                    &kp P                     &mt PIPE BACKSLASH
                 &kp LANG_HANGEUL  &kp A        &kp S         &kp D         &kp F           &kp G                        &kp H         &kp J        &kp K                &kp L                    &mt COLON SEMI            &mt DOUBLE_QUOTES SQT
-                &kp LEFT_SHIFT    &kp Z        &kp X         &kp C         &kp V           &kp B                        &kp N         &kp M        &mt LESS_THAN COMMA  &mt GREATER_THAN DOT     &mt QMARK FSLH            &kp RIGHT_SHIFT
-                                                   &mt LEFT_BRACE LEFT_BRACKET  &mt RIGHT_BRACE RIGHT_BRACKET                 &mt UNDER MINUS  &mt PLUS EQUAL
-                                                                            &mo NAV      &kp SPACE                    &kp ENTER  &none
-                                                                            &kp LEFT_ALT &kp LEFT_WIN                 &kp LEFT_SHIFT  &mo MOUSE
-                                                                            &mo MEDIA    &kp LCTRL                    &none  &none
+                &kp LEFT_SHIFT    &kp Z        &kp X         &kp C         &kp V           &kp B                        &kp N         &kp M        &mt LESS_THAN COMMA  &mt GREATER_THAN DOT     &mt QMARK FSLH            &mo MEDIA
+                                               &kp LEFT_WIN  &none                                                                   &mt UNDER MINUS  &mt PLUS EQUAL
+                                                                            &kp LEFT_SHIFT &mo NAV                      &kp SPACE  &kp ENTER
+                                                                            &kp LEFT_ALT   &mo MACRO                   &kp LEFT_SHIFT  &kp BACKSPACE
+                                                                            &kp LEFT_ALT   &kp LS(LCTRL)            &mt LEFT_BRACE LEFT_BRACKET  &mt RIGHT_BRACE RIGHT_BRACKET
             >;
         };
 
@@ -152,17 +149,18 @@
             >;
         };
 
-        mouse_layer {
-            label = "MOUSE";
+
+        macro_layer {
+            label = "MACRO";
             bindings = <
-                &trans  &trans    &trans    &trans  &trans     &trans              &trans         &trans          &trans          &trans           &trans     &trans
-                &trans  &trans    &trans    &trans  &trans     &trans              &trans         &trans          &msc SCRL_UP    &trans           &trans     &trans
-                &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans              &kp PAGE_UP    &mkp LCLK       &msc SCRL_DOWN  &mkp RCLK        &mkp MCLK  &trans
-                &trans  &trans    &trans    &trans  &trans     &trans              &kp PAGE_DOWN  &msc SCRL_LEFT  &trans          &msc SCRL_RIGHT  &trans     &trans
-                                 &trans  &trans                                            &trans  &trans
-                                                 &trans  &trans                            &mo MOUSE  &trans
-                                                 &trans  &trans                            &trans     &trans
-                                                 &trans  &trans                            &trans     &trans
+                &trans  &trans    &trans      &trans            &trans          &trans       &trans           &trans  &trans  &trans  &trans  &trans
+                &trans  &python   &pymanage   &make_migrations  &run_migration  &runserver   &restart_server  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans    &trans      &trans            &trans          &trans       &trans           &trans  &trans  &trans  &trans  &trans
+                &trans  &trans    &trans      &trans            &trans          &trans       &trans           &trans  &trans  &trans  &trans  &trans
+                         &trans    &trans                                                      &trans  &trans
+                                   &trans      &trans                                         &trans  &trans
+                                   &trans      &trans                                         &trans  &trans
+                                   &trans      &trans                                         &trans  &trans
             >;
         };
     };
